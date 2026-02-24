@@ -1,0 +1,104 @@
+.contenedor-historial {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.cabecera {
+    margin-bottom: 8px;
+}
+
+.tarjeta-filtro {
+    padding: 24px !important;
+}
+
+.fila-busqueda {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+}
+
+.campo-placa {
+    flex: 1;
+    min-width: 280px;
+}
+
+.btn-buscar {
+    height: 56px;
+    padding: 0 32px !important;
+    color: #ffffff !important;
+    margin-top: -16px;
+}
+
+.tabla-contenedor {
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    background: white;
+    overflow: hidden;
+}
+
+table {
+    width: 100%;
+}
+
+th.mat-mdc-header-cell {
+    background: #f8f9fa;
+    color: var(--text-color);
+    font-weight: 600;
+    font-size: 0.8rem;
+    padding: 16px 24px !important;
+}
+
+td.mat-mdc-cell {
+    padding: 16px 24px !important;
+    font-size: 0.9rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.celda-placa {
+    font-weight: 600;
+}
+
+.celda-subtexto {
+    color: var(--text-muted);
+    font-size: 0.75rem;
+}
+
+.celda-descripcion {
+    color: var(--text-muted);
+    max-width: 300px;
+}
+
+.badget-estado {
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+.estado-pendiente {
+    background: #fee7d3;
+    color: #8c3d00;
+}
+
+.estado-completado {
+    background: #e6f4ea;
+    color: #137333;
+}
+
+.estado-cancelado {
+    background: #fce8e6;
+    color: #c5221f;
+}
+
+.sin-resultados {
+    padding: 48px;
+    text-align: center;
+    color: var(--text-muted);
+}
+
+.mat-mdc-paginator {
+    background: #f8f9fa !important;
+}

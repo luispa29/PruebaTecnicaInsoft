@@ -1,0 +1,161 @@
+{
+    "info": {
+        "name": "API Gestión de Citas",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "variable": [
+        {
+            "key": "baseUrl",
+            "value": "http://localhost:5005"
+        }
+    ],
+    "item": [
+        {
+            "name": "Consultar citas por placa",
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                    "raw": "{{baseUrl}}/api/citas/placa/ABC-1234",
+                    "host": [
+                        "{{baseUrl}}"
+                    ],
+                    "path": [
+                        "api",
+                        "citas",
+                        "placa",
+                        "ABC-1234"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "Obtener horarios disponibles",
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                    "raw": "{{baseUrl}}/api/citas/horarios-disponibles?fecha=2026-02-24",
+                    "host": [
+                        "{{baseUrl}}"
+                    ],
+                    "path": [
+                        "api",
+                        "citas",
+                        "horarios-disponibles"
+                    ],
+                    "query": [
+                        {
+                            "key": "fecha",
+                            "value": "2026-02-24"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "name": "Agendar cita - Válida (lunes, 09:00)",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n  \"placa\": \"ABC-1234\",\n  \"marca\": \"Toyota\",\n  \"modelo\": \"Corolla\",\n  \"anio\": 2022,\n  \"fechaCita\": \"2026-02-23T00:00:00\",\n  \"horaCita\": \"09:00\",\n  \"descripcion\": \"Cambio de aceite\"\n}"
+                },
+                "url": {
+                    "raw": "{{baseUrl}}/api/citas",
+                    "host": [
+                        "{{baseUrl}}"
+                    ],
+                    "path": [
+                        "api",
+                        "citas"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "Agendar cita - Error: fin de semana",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n  \"placa\": \"XYZ-9999\",\n  \"marca\": \"Honda\",\n  \"modelo\": \"Civic\",\n  \"anio\": 2021,\n  \"fechaCita\": \"2026-02-22T00:00:00\",\n  \"horaCita\": \"10:00\",\n  \"descripcion\": \"Revisión general\"\n}"
+                },
+                "url": {
+                    "raw": "{{baseUrl}}/api/citas",
+                    "host": [
+                        "{{baseUrl}}"
+                    ],
+                    "path": [
+                        "api",
+                        "citas"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "Agendar cita - Error: hora fuera de rango",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n  \"placa\": \"XYZ-9999\",\n  \"marca\": \"Honda\",\n  \"modelo\": \"Civic\",\n  \"anio\": 2021,\n  \"fechaCita\": \"2026-02-24T00:00:00\",\n  \"horaCita\": \"15:00\",\n  \"descripcion\": \"Revisión general\"\n}"
+                },
+                "url": {
+                    "raw": "{{baseUrl}}/api/citas",
+                    "host": [
+                        "{{baseUrl}}"
+                    ],
+                    "path": [
+                        "api",
+                        "citas"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "Agendar cita - Error: intervalo inválido (09:15)",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n  \"placa\": \"XYZ-9999\",\n  \"marca\": \"Honda\",\n  \"modelo\": \"Civic\",\n  \"anio\": 2021,\n  \"fechaCita\": \"2026-02-24T00:00:00\",\n  \"horaCita\": \"09:15\",\n  \"descripcion\": \"Revisión general\"\n}"
+                },
+                "url": {
+                    "raw": "{{baseUrl}}/api/citas",
+                    "host": [
+                        "{{baseUrl}}"
+                    ],
+                    "path": [
+                        "api",
+                        "citas"
+                    ]
+                }
+            }
+        }
+    ]
+}

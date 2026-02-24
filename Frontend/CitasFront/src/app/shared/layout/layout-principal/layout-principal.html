@@ -1,0 +1,34 @@
+<mat-sidenav-container class="contenedor-sidenav">
+  <mat-sidenav mode="side" opened class="sidenav">
+    <div class="sidenav-header">
+      <span class="logo-text">Gestión de Citas</span>
+    </div>
+
+    <mat-nav-list>
+      <a mat-list-item routerLink="/historial" routerLinkActive="activo">
+        <mat-icon matListItemIcon>history</mat-icon>
+        <span matListItemTitle>Historial de Citas</span>
+      </a>
+      <a mat-list-item routerLink="/agendar" routerLinkActive="activo">
+        <mat-icon matListItemIcon>add_calendar</mat-icon>
+        <span matListItemTitle>Agendar Cita</span>
+      </a>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <mat-toolbar class="toolbar">
+      <span>Sistema de Citas Vehiculares</span>
+    </mat-toolbar>
+
+    <div class="contenido">
+      <router-outlet />
+    </div>
+
+    @if (cargaService.estaCargando()) {
+    <div class="overlay-carga">
+      <mat-spinner diameter="40" />
+    </div>
+    }
+  </mat-sidenav-content>
+</mat-sidenav-container>

@@ -1,0 +1,6 @@
+@ApiCitas_HostAddress = http://localhost:5005
+
+GET {{ApiCitas_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

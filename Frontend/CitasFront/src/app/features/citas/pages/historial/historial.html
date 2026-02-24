@@ -1,0 +1,76 @@
+<div class="contenedor-historial animate-fade-in">
+    <div class="cabecera">
+        <h1 class="seccion-titulo">Historial de Citas</h1>
+        <p class="texto-secundario">Consulte el estado de las citas programadas ingresando la placa del vehículo.</p>
+    </div>
+
+    <mat-card class="tarjeta-filtro">
+        <div class="fila-busqueda">
+            <mat-form-field appearance="outline" class="campo-placa">
+                <mat-label>Número de Placa</mat-label>
+                <input matInput [formControl]="campoPlaca" placeholder="Ej: ABC-123 o ABC-1234"
+                    (keyup.enter)="buscar()" />
+                @if (campoPlaca.hasError('pattern')) {
+                <mat-error>Formato requerido: ABC-123 o ABC-1234</mat-error>
+                }
+            </mat-form-field>
+
+            <button mat-raised-button color="primary" class="btn-buscar" (click)="buscar()"
+                [disabled]="campoPlaca.invalid">
+                Consultar Historial
+            </button>
+        </div>
+    </mat-card>
+
+    @if (buscado()) {
+    <div class="tabla-contenedor">
+        @if (sinResultados()) {
+        <div class="sin-resultados">
+            <h3>Sin registros encontrados</h3>
+            <p>No existen citas para la placa indicada.</p>
+        </div>
+        } @else {
+        <table mat-table [dataSource]="fuenteDatos">
+            <ng-container matColumnDef="placa">
+                <th mat-header-cell *matHeaderCellDef>Vehículo</th>
+                <td mat-cell *matCellDef="let fila">
+                    <div class="celda-placa">{{ fila.placa }}</div>
+                    <div class="celda-subtexto">{{ fila.marca }} {{ fila.modelo }}</div>
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="estado">
+                <th mat-header-cell *matHeaderCellDef>Estado</th>
+                <td mat-cell *matCellDef="let fila">
+                    <span class="badget-estado" [class]="'estado-' + fila.estado.toLowerCase()">
+                        {{ fila.estado | uppercase }}
+                    </span>
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="fechaCita">
+                <th mat-header-cell *matHeaderCellDef>Fecha</th>
+                <td mat-cell *matCellDef="let fila">{{ fila.fechaCita | date: 'dd/MM/yyyy' }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="horaCita">
+                <th mat-header-cell *matHeaderCellDef>Hora</th>
+                <td mat-cell *matCellDef="let fila">{{ fila.horaCita }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="descripcion">
+                <th mat-header-cell *matHeaderCellDef>Descripción</th>
+                <td mat-cell *matCellDef="let fila" class="celda-descripcion">{{ fila.descripcion || '-' }}</td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="columnasVisibles"></tr>
+            <tr mat-row *matRowDef="let fila; columns: columnasVisibles;"></tr>
+        </table>
+
+        <mat-paginator [length]="totalRegistros()" [pageSize]="tamanoPagina()" [pageSizeOptions]="opcionesTamano"
+            (page)="cambiarPagina($event)" aria-label="Seleccionar página">
+        </mat-paginator>
+        }
+    </div>
+    }
+</div>
